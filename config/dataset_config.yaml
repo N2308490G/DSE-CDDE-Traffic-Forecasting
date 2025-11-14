@@ -1,0 +1,59 @@
+# Dataset Configuration
+# Note: Complete configuration will be provided upon paper acceptance
+
+# PEMS03 Dataset
+PEMS03:
+  name: "PEMS03"
+  num_nodes: 358
+  num_timesteps: 26208
+  input_dim: 1
+  output_dim: 1
+  data_path: "data/raw/PEMS03"
+  adj_matrix_path: "data/raw/PEMS03/adj_matrix.npy"
+  
+# PEMS04 Dataset
+PEMS04:
+  name: "PEMS04"
+  num_nodes: 307
+  num_timesteps: 16992
+  input_dim: 1
+  output_dim: 1
+  data_path: "data/raw/PEMS04"
+  adj_matrix_path: "data/raw/PEMS04/adj_matrix.npy"
+  
+# PEMS07 Dataset
+PEMS07:
+  name: "PEMS07"
+  num_nodes: 883
+  num_timesteps: 28224
+  input_dim: 1
+  output_dim: 1
+  data_path: "data/raw/PEMS07"
+  adj_matrix_path: "data/raw/PEMS07/adj_matrix.npy"
+  
+# PEMS08 Dataset
+PEMS08:
+  name: "PEMS08"
+  num_nodes: 170
+  num_timesteps: 17856
+  input_dim: 1
+  output_dim: 1
+  data_path: "data/raw/PEMS08"
+  adj_matrix_path: "data/raw/PEMS08/adj_matrix.npy"
+  
+# Data preprocessing configuration
+preprocessing:
+  normalization: "z-score"  # Options: z-score, min-max
+  missing_value_handling: "interpolation"  # Options: interpolation, zero-fill
+  train_ratio: 0.7
+  val_ratio: 0.1
+  test_ratio: 0.2
+  
+# Data augmentation (for robustness training)
+augmentation:
+  add_noise: true
+  noise_level: 0.1
+  random_masking: true
+  masking_ratio: 0.15
+  
+# Note: Dataset download scripts and preprocessing details will be provided upon code release

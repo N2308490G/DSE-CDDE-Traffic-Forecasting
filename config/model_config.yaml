@@ -1,0 +1,66 @@
+# Model Configuration for DSE-CDDE
+# Note: Complete configuration will be provided upon paper acceptance
+
+model:
+  name: "DSE_CDDE"
+  
+  # Model architecture parameters
+  architecture:
+    num_nodes: 307  # Number of traffic sensors (PEMS04 default)
+    input_dim: 1    # Input feature dimension
+    hidden_dim: 64  # Hidden state dimension
+    output_dim: 1   # Output feature dimension
+    num_segments: 4 # Number of dynamic segments
+    
+  # Dynamic Segment Extractor (DSE) parameters
+  dse:
+    segment_hidden_dim: 32
+    learnable_boundaries: true
+    multi_scale_kernels: [3, 5, 7]
+    
+  # Cross-Dimensional Dependency Encoder (CDDE) parameters
+  cdde:
+    num_attention_heads: 8
+    dropout_rate: 0.1
+    denoising_weight: 0.5
+    
+  # Prediction parameters
+  prediction:
+    input_length: 12   # Input sequence length (hours)
+    pred_length: 12    # Prediction horizon (hours)
+    
+# Training configuration
+training:
+  batch_size: 64
+  num_epochs: 100
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  grad_clip: 5.0
+  
+  # Optimizer
+  optimizer: "Adam"
+  
+  # Learning rate scheduler
+  scheduler:
+    type: "ReduceLROnPlateau"
+    patience: 10
+    factor: 0.5
+    
+  # Early stopping
+  early_stopping:
+    patience: 20
+    min_delta: 0.0001
+    
+# Loss function configuration
+loss:
+  main_loss: "MAE"  # Main prediction loss
+  denoising_loss: "MSE"  # Self-supervised denoising loss
+  loss_weights:
+    prediction: 1.0
+    denoising: 0.5
+    
+# Evaluation configuration
+evaluation:
+  metrics: ["MAE", "RMSE", "MAPE"]
+  
+# Note: Detailed hyperparameters will be finalized upon code release
